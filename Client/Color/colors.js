@@ -1,0 +1,15 @@
+export default GlobalColors = {
+  mainColor1: "#FFCE31",
+  mainColor2: "#72C6A1",
+  mainColor3: "#0C1941",
+  background: "#0C1941",
+  second_background: "#FFFFFF",
+  button: "#72C6A1",
+  lightBackground: "#283663",
+  background_input: "#535252",
+  text_input: "#9B9B9B",
+  validate: "#FF4E00",
+  price: "#1C6AE4",
+  headerColor: "#0080ff",
+  contentBackground: "#E9E9E9",
+};
