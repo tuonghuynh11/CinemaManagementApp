@@ -1,4 +1,5 @@
 export class Cast {
+
   constructor(
     adult,
     gender,
@@ -27,3 +28,4 @@ export class Cast {
     this.order = order;
   }
 }
+

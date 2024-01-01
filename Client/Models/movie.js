@@ -1,4 +1,5 @@
 export class Movie {
+
   constructor(
     id,
     title,
@@ -25,3 +26,4 @@ export class Movie {
     this.spoken_languages = spoken_languages;
   }
 }
+
