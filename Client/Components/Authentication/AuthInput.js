@@ -1,5 +1,6 @@
 import { Text, TextInput, View, StyleSheet } from "react-native";
-
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useState } from "react";
 function AuthInput({
   label,
   keyboardType,
@@ -9,7 +10,9 @@ function AuthInput({
   isInvalid,
   placeholder,
   message,
+  isDisabled,
 }) {
+  const [showPassword, setShowPassword] = useState(secure);
   return (
     <View style={styles.root}>
       <Text style={[styles.label]}>{label}</Text>
@@ -19,9 +22,21 @@ function AuthInput({
           keyboardType={keyboardType}
           value={value}
           onChangeText={onUpdateValue}
-          secureTextEntry={secure}
+          secureTextEntry={showPassword}
           placeholder={placeholder}
+          editable={!isDisabled}
+          placeholderTextColor="#453e3e49"
         />
+        {secure && (
+          <MaterialCommunityIcons
+            name={showPassword ? "eye-off" : "eye"}
+            size={24}
+            color="#aaa"
+            style={{ marginRight: 10 }}
+            onPress={() => setShowPassword(!showPassword)}
+            disabled={isDisabled}
+          />
+        )}
       </View>
       {isInvalid && <Text style={styles.invalidLabel}>*{message}</Text>}
     </View>
@@ -43,12 +58,16 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "black",
     borderRadius: 10,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   textInput: {
     color: "black",
     fontSize: 17,
     paddingHorizontal: 8,
     paddingVertical: 8,
+    flex: 1,
   },
   invalidLabel: {
     color: "#FF4E00",
