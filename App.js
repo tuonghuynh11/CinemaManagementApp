@@ -37,22 +37,7 @@ import MoreMovieListScreen from "./Client/Screens/User/MoreMovieListScreen";
 import BookingContextProvider from "./Client/Store/bookingContext";
 import MovieScheduleOfCinemaScreen from "./Client/Screens/User/MovieScheduleOfCinemaScreen";
 
-import ManageMovie from "./Client/Screens/Manager/ManageMovie";
-import ManageStaff from "./Client/Screens/Manager/ManageStaff";
-import ManageCinema from "./Client/Screens/Manager/ManageCinema";
-import ManageManager from "./Client/Screens/Manager/ManageManager";
-import ManageStatistic from "./Client/Screens/Manager/ManageStatistic";
-import ManageFoodDrink from "./Client/Screens/Manager/ManageFoodDrink";
-import AddCinema from "./Client/Screens/Manager/AddCinema";
-import AddManager from "./Client/Screens/Manager/AddManager";
-import AddStaff from "./Client/Screens/Manager/AddStaff";
-import AddFoodDrink from "./Client/Screens/Manager/AddFoodDrink";
-import AddMenu from "./Client/Screens/Manager/AddMenu";
-import ManageCinemaMenu from "./Client/Screens/Manager/ManageCinemaMenu";
-import AddMovie from "./Client/Screens/Manager/AddMovie";
-import ManageShowtime from "./Client/Screens/Manager/ManageShowtime";
-import AddShowTime from "./Client/Screens/Manager/AddShowTime";
-import Drawer from "./Client/Screens/Manager/Drawer";
+import DrawerManager from "./Client/Screens/Manager/Drawer";
 
 const Stack = createNativeStackNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -471,6 +456,7 @@ export default function App() {
     }
     //Admin
     else {
+      return <DrawerManager />;
     }
   }
   function Navigation() {
@@ -531,16 +517,10 @@ export default function App() {
 
   return (
     <>
-
-  
-
-
       <StatusBar style="light" />
       <AuthContextProvider>
-
         <Root />
-      </AuthContextProvider> 
-
+      </AuthContextProvider>
     </>
   );
 }

@@ -44,7 +44,7 @@ function SearchBoxFilter({ searchFunc, initValue = "", filterHandler }) {
       </View>
       <TextInput
         style={styles.searchBox}
-        placeholder="Enter an movie name"
+        placeholder="Enter a movie name"
         keyboardType="default"
         placeholderTextColor="#c8c0c0"
         onChangeText={onTextHandler}

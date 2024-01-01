@@ -11,7 +11,7 @@ import {
   Keyboard,
   Dimensions,
   ScrollView,
-  ActivityIndicator
+  ActivityIndicator,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import { AntDesign } from "@expo/vector-icons";
@@ -52,13 +52,12 @@ export default function ManageStatistic({ navigation }) {
   const [dataReF, setDataReF] = useState([0, 0, 0, 0, 0, 0]);
   const [dataReS, setDataReS] = useState([0, 0, 0, 0, 0, 0]);
 
-
   const fetchTopMovies = async () => {
     if (isFocused) {
       try {
         setIndicator(true);
         const temp = await getRevenue();
-        
+
         setDataReF(
           temp.revenueEachMonths
             .sort((a, b) => a.month - b.month)
@@ -72,7 +71,81 @@ export default function ManageStatistic({ navigation }) {
             .map((item) => item.totalRevenue)
         );
         //const data = await getAllTopMovies();
-        const data = {result: [{"movieId": 873, "movieTitle": "The Color Purple", "numberOfViews": 7, "premiereDate": "1985-12-18", "revenue": 394.66}, {"movieId": 280, "movieTitle": "Terminator 2: Judgment Day", "numberOfViews": 4, "premiereDate": "1991-07-03", "revenue": 359.12}, {"movieId": 12, "movieTitle": "Finding Nemo", "numberOfViews": 2, "premiereDate": "2003-05-30", "revenue": 174.34}, {"movieId": 489, "movieTitle": "Good Will Hunting", "numberOfViews": 2, "premiereDate": "1997-12-05", "revenue": 142.72}, {"movieId": 675, "movieTitle": "Harry Potter and the Order of the Phoenix", "numberOfViews": 3, "premiereDate": "2007-07-08", "revenue": 94.35}, {"movieId": 157, "movieTitle": "Star Trek III: The Search for Spock", "numberOfViews": 1, "premiereDate": "1984-06-01", "revenue": 83.91}, {"movieId": 956, "movieTitle": "Mission: Impossible III", "numberOfViews": 4, "premiereDate": "2006-04-25", "revenue": 71.24}, {"movieId": 148, "movieTitle": "The Secret Life of Words", "numberOfViews": 2, "premiereDate": "2005-12-15", "revenue": 45.82}, {"movieId": 494, "movieTitle": "Shaft in Africa", "numberOfViews": 0, "premiereDate": "1973-06-14", "revenue": 0}, {"movieId": 35, "movieTitle": "The Simpsons Movie", "numberOfViews": 0, "premiereDate": "2007-07-25", "revenue": 0}], "year": 2023}
+        const data = {
+          result: [
+            {
+              movieId: 873,
+              movieTitle: "The Color Purple",
+              numberOfViews: 7,
+              premiereDate: "1985-12-18",
+              revenue: 394.66,
+            },
+            {
+              movieId: 280,
+              movieTitle: "Terminator 2: Judgment Day",
+              numberOfViews: 4,
+              premiereDate: "1991-07-03",
+              revenue: 359.12,
+            },
+            {
+              movieId: 12,
+              movieTitle: "Finding Nemo",
+              numberOfViews: 2,
+              premiereDate: "2003-05-30",
+              revenue: 174.34,
+            },
+            {
+              movieId: 489,
+              movieTitle: "Good Will Hunting",
+              numberOfViews: 2,
+              premiereDate: "1997-12-05",
+              revenue: 142.72,
+            },
+            {
+              movieId: 675,
+              movieTitle: "Harry Potter and the Order of the Phoenix",
+              numberOfViews: 3,
+              premiereDate: "2007-07-08",
+              revenue: 94.35,
+            },
+            {
+              movieId: 157,
+              movieTitle: "Star Trek III: The Search for Spock",
+              numberOfViews: 1,
+              premiereDate: "1984-06-01",
+              revenue: 83.91,
+            },
+            {
+              movieId: 956,
+              movieTitle: "Mission: Impossible III",
+              numberOfViews: 4,
+              premiereDate: "2006-04-25",
+              revenue: 71.24,
+            },
+            {
+              movieId: 148,
+              movieTitle: "The Secret Life of Words",
+              numberOfViews: 2,
+              premiereDate: "2005-12-15",
+              revenue: 45.82,
+            },
+            {
+              movieId: 494,
+              movieTitle: "Shaft in Africa",
+              numberOfViews: 0,
+              premiereDate: "1973-06-14",
+              revenue: 0,
+            },
+            {
+              movieId: 35,
+              movieTitle: "The Simpsons Movie",
+              numberOfViews: 0,
+              premiereDate: "2007-07-25",
+              revenue: 0,
+            },
+          ],
+          year: 2023,
+        };
 
         setData({
           labels: data.result.map((movie) => movie.movieTitle),
@@ -91,7 +164,7 @@ export default function ManageStatistic({ navigation }) {
       } catch (error) {
         // Handle error, e.g., redirect to login if unauthorized
         console.log("Error fetching top movie:", error);
-        setIndicator(false)
+        setIndicator(false);
       }
     }
   };
@@ -105,9 +178,12 @@ export default function ManageStatistic({ navigation }) {
   // console.log(dataReS);
 
   return (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+    <TouchableWithoutFeedback
+      style={{ height: "100%" }}
+      onPress={() => Keyboard.dismiss()}
+    >
       <SafeAreaView style={styles.container}>
-      <ActivityIndicator
+        <ActivityIndicator
           style={styles.indicator}
           size={"large"}
           animating={indicator}
@@ -260,6 +336,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 55,
     backgroundColor: "#0C1941",
+    height: "100%",
   },
   header: {
     flexDirection: "row",
@@ -280,6 +357,7 @@ const styles = StyleSheet.create({
   },
   body: {
     flex: 1,
+    height: "100%",
   },
   bodySearch: {
     flex: 8,
