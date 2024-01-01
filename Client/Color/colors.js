@@ -12,4 +12,11 @@ export default GlobalColors = {
   price: "#1C6AE4",
   headerColor: "#0080ff",
   contentBackground: "#E9E9E9",
+  searchBackground: "#3B3F46",
+  icon_active: "#0296E5",
+  icon_non_active: "#67686D",
+  rate_icon: "#FF8700",
+  number: "#657388",
+  numberStoke: "#0296E5",
+  back_btn: "#107ff78e",
 };
