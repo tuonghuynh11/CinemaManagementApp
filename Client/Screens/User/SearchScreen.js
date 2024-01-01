@@ -16,7 +16,6 @@ import {
   getTopRatedMovies,
   searchMovies,
 } from "../../Services/httpService";
-import { Movie } from "../../Models/Movie";
 import {
   useCallback,
   useContext,

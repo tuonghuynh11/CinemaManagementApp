@@ -36,7 +36,7 @@ function SearchBox({ searchFunc, initValue = "" }) {
     <View style={styles.container}>
       <TextInput
         style={styles.searchBox}
-        placeholder="Enter an movie name"
+        placeholder="Enter a movie name"
         keyboardType="default"
         placeholderTextColor="#c8c0c0"
         onChangeText={onTextHandler}
