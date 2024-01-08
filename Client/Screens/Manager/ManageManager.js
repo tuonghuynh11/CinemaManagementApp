@@ -35,6 +35,7 @@ export default function ManageManager({ route, navigation }) {
 
   const [staffList, setStaffList] = useState([]);
   const [staffListData, setStaffListData] = useState([]);
+  const [userData, setUserData] = useState([]);
   
   const [cinemaList, setCinemaList] = useState([]);
   const isFocused = useIsFocused();
@@ -46,6 +47,19 @@ export default function ManageManager({ route, navigation }) {
         const data = await getAllStaffs();
         setStaffList(data.filter((item) => item.role == "Manager"));
         setStaffListData(data.filter((item) => item.role == "Manager"));
+        const tempData = data.filter((item) => item.role == "Manager")
+        const dataUser = await getAllUsers();
+        //setUserData(dataUser);
+        for (let i = 0; i < tempData.length; i++) {
+          const user = tempData[i];
+
+          const info = dataUser.find(itemU=>itemU.id == user.userId);
+
+          user.info = info;
+          
+        }
+
+        setUserData(tempData);
         const cinemaData = await getAllCinemas();
         setCinemaList(cinemaData);
 
@@ -149,7 +163,7 @@ export default function ManageManager({ route, navigation }) {
 
           <View style={styles.bodyList}>
             <FlatList
-              data={staffList}
+              data={userData}
               renderItem={({ item }) => (
                 <Pressable
                 //onPress={() => navigation.navigate("Tracking", item)}

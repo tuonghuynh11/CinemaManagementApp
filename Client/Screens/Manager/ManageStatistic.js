@@ -21,6 +21,7 @@ import { Entypo } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import MovieCard from "./MovieCard";
 import CinemaCard from "./CinemaCard";
+import DropDownPicker from "react-native-dropdown-picker";
 
 import {
   LineChart,
@@ -51,12 +52,210 @@ export default function ManageStatistic({ navigation }) {
 
   const [dataReF, setDataReF] = useState([0, 0, 0, 0, 0, 0]);
   const [dataReS, setDataReS] = useState([0, 0, 0, 0, 0, 0]);
+  const handlerFilter = () => {
+    fetchTopMovies(currentValueSize);
+    if(currentValueSize == "2023"){
+      const data = {
+        result: [
+          {
+            movieId: 873,
+            movieTitle: "The Color Purple",
+            numberOfViews: 7,
+            premiereDate: "1985-12-18",
+            revenue: 394.66,
+          },
+          {
+            movieId: 280,
+            movieTitle: "Terminator 2: Judgment Day",
+            numberOfViews: 4,
+            premiereDate: "1991-07-03",
+            revenue: 359.12,
+          },
+          {
+            movieId: 12,
+            movieTitle: "Finding Nemo",
+            numberOfViews: 2,
+            premiereDate: "2003-05-30",
+            revenue: 174.34,
+          },
+          {
+            movieId: 489,
+            movieTitle: "Good Will Hunting",
+            numberOfViews: 2,
+            premiereDate: "1997-12-05",
+            revenue: 142.72,
+          },
+          {
+            movieId: 675,
+            movieTitle: "Harry Potter and the Order of the Phoenix",
+            numberOfViews: 3,
+            premiereDate: "2007-07-08",
+            revenue: 94.35,
+          },
+          {
+            movieId: 157,
+            movieTitle: "Star Trek III: The Search for Spock",
+            numberOfViews: 1,
+            premiereDate: "1984-06-01",
+            revenue: 83.91,
+          },
+          {
+            movieId: 956,
+            movieTitle: "Mission: Impossible III",
+            numberOfViews: 4,
+            premiereDate: "2006-04-25",
+            revenue: 71.24,
+          },
+          {
+            movieId: 148,
+            movieTitle: "The Secret Life of Words",
+            numberOfViews: 2,
+            premiereDate: "2005-12-15",
+            revenue: 45.82,
+          },
+          {
+            movieId: 494,
+            movieTitle: "Shaft in Africa",
+            numberOfViews: 12,
+            premiereDate: "1973-06-14",
+            revenue: 0,
+          },
+          {
+            movieId: 35,
+            movieTitle: "The Simpsons Movie",
+            numberOfViews: 1,
+            premiereDate: "2007-07-25",
+            revenue: 0,
+          },
+        ],
+        year: 2023,
+      };
 
-  const fetchTopMovies = async () => {
-    if (isFocused) {
+      setData({
+        labels: data.result.map((movie) => movie.movieTitle),
+        datasets: [
+          {
+            data: data.result.map((movie) => movie.numberOfViews),
+          },
+        ],
+      });
+    }
+    else{
+      const data = {
+        result: [
+          {
+            movieId: 873,
+            movieTitle: "The Color Purple",
+            numberOfViews: 1,
+            premiereDate: "1985-12-18",
+            revenue: 394.66,
+          },
+          {
+            movieId: 280,
+            movieTitle: "Terminator 2: Judgment Day",
+            numberOfViews: 15,
+            premiereDate: "1991-07-03",
+            revenue: 359.12,
+          },
+          {
+            movieId: 12,
+            movieTitle: "Finding Nemo",
+            numberOfViews: 8,
+            premiereDate: "2003-05-30",
+            revenue: 174.34,
+          },
+          {
+            movieId: 489,
+            movieTitle: "Good Will Hunting",
+            numberOfViews: 6,
+            premiereDate: "1997-12-05",
+            revenue: 142.72,
+          },
+          {
+            movieId: 675,
+            movieTitle: "Harry Potter and the Order of the Phoenix",
+            numberOfViews: 4,
+            premiereDate: "2007-07-08",
+            revenue: 94.35,
+          },
+          {
+            movieId: 157,
+            movieTitle: "Star Trek III: The Search for Spock",
+            numberOfViews: 12,
+            premiereDate: "1984-06-01",
+            revenue: 83.91,
+          },
+          {
+            movieId: 956,
+            movieTitle: "Mission: Impossible III",
+            numberOfViews: 7,
+            premiereDate: "2006-04-25",
+            revenue: 71.24,
+          },
+          {
+            movieId: 148,
+            movieTitle: "The Secret Life of Words",
+            numberOfViews: 5,
+            premiereDate: "2005-12-15",
+            revenue: 45.82,
+          },
+          {
+            movieId: 494,
+            movieTitle: "Shaft in Africa",
+            numberOfViews: 6,
+            premiereDate: "1973-06-14",
+            revenue: 0,
+          },
+          {
+            movieId: 35,
+            movieTitle: "The Simpsons Movie",
+            numberOfViews: 2,
+            premiereDate: "2007-07-25",
+            revenue: 0,
+          },
+        ],
+        year: 2024,
+      };
+
+      setData({
+        labels: data.result.map((movie) => movie.movieTitle),
+        datasets: [
+          {
+            data: data.result.map((movie) => movie.numberOfViews),
+          },
+        ],
+      });
+    }
+  };
+
+  const [isOpenSize, setIsOpenSize] = useState(false);
+  const [currentValueSize, setCurrentValueSize] = useState("");
+  const itemsSize = [
+    {
+      label: "2023",
+      value: "2023",
+      labelStyle: {
+        color: "#FFCE31",
+      },
+    },
+    {
+      label: "2024",
+      value: "2024",
+      labelStyle: {
+        color: "#FFCE31",
+      },
+    },
+  ];
+
+  const fetchTopMovies = async (year) => {
+    
       try {
         setIndicator(true);
-        const temp = await getRevenue();
+
+
+        const temp = await getRevenue(year);
+
+        console.log(temp);
 
         setDataReF(
           temp.revenueEachMonths
@@ -71,90 +270,7 @@ export default function ManageStatistic({ navigation }) {
             .map((item) => item.totalRevenue)
         );
         //const data = await getAllTopMovies();
-        const data = {
-          result: [
-            {
-              movieId: 873,
-              movieTitle: "The Color Purple",
-              numberOfViews: 7,
-              premiereDate: "1985-12-18",
-              revenue: 394.66,
-            },
-            {
-              movieId: 280,
-              movieTitle: "Terminator 2: Judgment Day",
-              numberOfViews: 4,
-              premiereDate: "1991-07-03",
-              revenue: 359.12,
-            },
-            {
-              movieId: 12,
-              movieTitle: "Finding Nemo",
-              numberOfViews: 2,
-              premiereDate: "2003-05-30",
-              revenue: 174.34,
-            },
-            {
-              movieId: 489,
-              movieTitle: "Good Will Hunting",
-              numberOfViews: 2,
-              premiereDate: "1997-12-05",
-              revenue: 142.72,
-            },
-            {
-              movieId: 675,
-              movieTitle: "Harry Potter and the Order of the Phoenix",
-              numberOfViews: 3,
-              premiereDate: "2007-07-08",
-              revenue: 94.35,
-            },
-            {
-              movieId: 157,
-              movieTitle: "Star Trek III: The Search for Spock",
-              numberOfViews: 1,
-              premiereDate: "1984-06-01",
-              revenue: 83.91,
-            },
-            {
-              movieId: 956,
-              movieTitle: "Mission: Impossible III",
-              numberOfViews: 4,
-              premiereDate: "2006-04-25",
-              revenue: 71.24,
-            },
-            {
-              movieId: 148,
-              movieTitle: "The Secret Life of Words",
-              numberOfViews: 2,
-              premiereDate: "2005-12-15",
-              revenue: 45.82,
-            },
-            {
-              movieId: 494,
-              movieTitle: "Shaft in Africa",
-              numberOfViews: 0,
-              premiereDate: "1973-06-14",
-              revenue: 0,
-            },
-            {
-              movieId: 35,
-              movieTitle: "The Simpsons Movie",
-              numberOfViews: 0,
-              premiereDate: "2007-07-25",
-              revenue: 0,
-            },
-          ],
-          year: 2023,
-        };
-
-        setData({
-          labels: data.result.map((movie) => movie.movieTitle),
-          datasets: [
-            {
-              data: data.result.map((movie) => movie.numberOfViews),
-            },
-          ],
-        });
+        
 
         //console.log(data);
 
@@ -166,12 +282,8 @@ export default function ManageStatistic({ navigation }) {
         console.log("Error fetching top movie:", error);
         setIndicator(false);
       }
-    }
+    
   };
-
-  useEffect(() => {
-    fetchTopMovies();
-  }, [isFocused]);
   // console.log(data);
 
   // console.log(dataReF);
@@ -210,6 +322,48 @@ export default function ManageStatistic({ navigation }) {
             <AntDesign name="pluscircle" size={30} color="#FFCE31" />
           </Pressable> */}
         </View>
+        <View style={{ flexDirection: "row" }}>
+            <View style={styles.bodySearch}>
+            <View style={{ ...styles.dropDownStyle, zIndex: 100 }}>
+              <DropDownPicker
+                placeholderStyle={{
+                  color: "#a28012",
+                }}
+                dropDownContainerStyle={{
+                  backgroundColor: "#283663",
+                }}
+                modalProps={{
+                  animationType: "slide",
+                }}
+                modalContentContainerStyle={{
+                  backgroundColor: "#283663",
+                }}
+                theme="DARK"
+                items={itemsSize}
+                open={isOpenSize}
+                setOpen={() => setIsOpenSize(!isOpenSize)}
+                value={currentValueSize}
+                setValue={(val) => {
+                  setCurrentValueSize(val);
+                }}
+                maxHeight={150}
+                autoScroll
+                placeholder="Select Year"
+                showTickIcon={true}
+                style={styles.startDropDown}
+                nestedScrollEnabled={true}
+                
+                // onChangeValue={(val) => fetchDistricts(val)}
+              />
+            </View>
+            </View>
+            <View style={{...styles.filter, zIndex: 100}}>
+              {/**filter */}
+              <Pressable onPress={handlerFilter}>
+                <Ionicons name="search" size={30} color="#72C6A1" />
+              </Pressable>
+            </View>
+          </View>
         <ScrollView style={styles.body}>
           <Text style={styles.titleText}>Revenue first half of the year</Text>
           <LineChart
@@ -401,5 +555,27 @@ const styles = StyleSheet.create({
     zIndex: 1000,
     right: "46%",
     top: "50%",
+  },
+  dropDownStyle: {
+    paddingRight: 130,
+    paddingLeft: 20,
+  },
+  startDropDown: {
+    zIndex: 100,
+    borderColor: "#FFCE31",
+    color: "#FFCE31",
+    paddingLeft: 20,
+  },
+  filter: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingEnd: 6,
+  },
+  bodySearch: {
+    flex: 8,
+    flexDirection: "row",
+    paddingHorizontal: 15,
+    paddingVertical: 15,
   },
 });

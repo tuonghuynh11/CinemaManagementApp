@@ -18,6 +18,7 @@ import { useIsFocused } from "@react-navigation/native";
 import { getAllStaffs } from "../../Util/staffService";
 import { getAllCinemas } from "../../Util/cinemaService";
 import DropDownPicker from "react-native-dropdown-picker";
+import { getAllUsers } from "../../Util/userService";
 
 DropDownPicker.setListMode("MODAL");
 
@@ -48,6 +49,7 @@ export default function StaffMorning({navigation}) {
   };
   const isFocused = useIsFocused();
   const [cinemaList, setCinemaList] = useState([]);
+  const [userData, setUserData] = useState([]);
 
   const fetchStaffs = async () => {
     if (isFocused) {
@@ -56,6 +58,19 @@ export default function StaffMorning({navigation}) {
         const data = await getAllStaffs();
         setStaffList(data.filter(item => item.role == "Staff"));
         setStaffListData(data.filter(item => item.role == "Staff"));
+        const tempData = data.filter((item) => item.role == "Staff")
+        const dataUser = await getAllUsers();
+        //setUserData(dataUser);
+        for (let i = 0; i < tempData.length; i++) {
+          const user = tempData[i];
+
+          const info = dataUser.find(itemU=>itemU.id == user.userId);
+
+          user.info = info;
+          
+        }
+
+        setUserData(tempData);
         const cinemaData = await getAllCinemas();
         setCinemaList(cinemaData);
         setIndicator(false);
@@ -141,10 +156,10 @@ export default function StaffMorning({navigation}) {
         </View>
         <View style={styles.bodyList}>
           <FlatList
-            data={staffList}
+            data={userData}
             renderItem={({ item }) => (
               <TouchableWithoutFeedback onPress={() => {}}>
-                <StaffCard item={item} navigation={navigation} deleteItem={deleteItem}/>
+                <StaffCard item={item} navigation={navigation} deleteItem={deleteItem} />
               </TouchableWithoutFeedback>
             )}
             keyExtractor={(item, index) => index}

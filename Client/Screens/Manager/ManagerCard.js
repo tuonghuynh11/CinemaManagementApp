@@ -23,7 +23,7 @@ export default function ManagerCard({item, navigation, deleteItem}) {
     navigation.navigate("AddManager", {item, userListData});
   };
 
-  const [userListData, setUserListData] = useState();
+  const [userListData, setUserListData] = useState([]);
   const [indicator, setIndicator] = useState(false);
   
   const contentS = "Successfully!";
@@ -53,23 +53,23 @@ export default function ManagerCard({item, navigation, deleteItem}) {
     setVisibleC(false);
   };
 
-  const fetchStaffs = async () => {
+  // const fetchStaffs = async () => {
 
-      try {
-        //setIndicator(true);
-        const data = await getAllUsers();
-        setUserListData(data.find(itemU=>itemU.id == item.userId));
+  //     try {
+  //       //setIndicator(true);
+  //       const data = await getAllUsers();
+  //       setUserListData(data.find(itemU=>itemU.id == item.userId));
 
-        //setIndicator(false);
-      } catch (error) {
-        // Handle error, e.g., redirect to login if unauthorized
-        console.log("Error fetching user:", error);
-      }
-  };
+  //       //setIndicator(false);
+  //     } catch (error) {
+  //       // Handle error, e.g., redirect to login if unauthorized
+  //       console.log("Error fetching user:", error);
+  //     }
+  // };
 
-  useEffect(() => {
-    fetchStaffs();
-  }, []);
+  // useEffect(() => {
+  //   fetchStaffs();
+  // }, []);
 
   const confirm = async () => {
     try{
@@ -119,8 +119,8 @@ export default function ManagerCard({item, navigation, deleteItem}) {
 
         <View style={styles.info}>
           {/**coachnum, type */}
-          <Text style={styles.text}>Manager Name: {userListData?userListData.fullName:""}</Text>
-          <Text style={styles.text}>Gender: {userListData?userListData.sex:""}</Text>
+          <Text style={styles.text}>Manager Name: {item.info.fullName}</Text>
+          <Text style={styles.text}>Gender: {item.info.sex}</Text>
           <Text style={styles.text}>Email: {item.email}</Text>
         </View>
         <View style={styles.edit}>
