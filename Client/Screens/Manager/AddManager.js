@@ -128,7 +128,7 @@ export default function AddManager({ navigation, route }) {
   };
 
   const [validateManagerName, setValidateManagerName] = useState(true);
-  const [ManagerName, setManagerName] = useState(route.params!=undefined?route.params.userListData.fullName:"");
+  const [ManagerName, setManagerName] = useState(route.params!=undefined?route.params.item.info.fullName:"");
   const ManagerNameHandler = (val) => {
     setManagerName(val);
     setValidateManagerName(true);
@@ -146,7 +146,7 @@ export default function AddManager({ navigation, route }) {
   };
 
   const [validatePhone, setValidatePhone] = useState(true);
-  const [Phone, setPhone] = useState(route.params!=undefined?route.params.userListData.phoneNumber:"");
+  const [Phone, setPhone] = useState(route.params!=undefined?route.params.item.info.phoneNumber:"");
   const PhoneHandler = (val) => {
     setPhone(val);
     setValidatePhone(true);
@@ -158,20 +158,20 @@ export default function AddManager({ navigation, route }) {
     setValidateEmail(true);
   };
   const [validateUsername, setValidateUsername] = useState(true);
-  const [Username, setUsername] = useState(route.params!=undefined?route.params.userListData.username:"");
+  const [Username, setUsername] = useState(route.params!=undefined?route.params.item.info.username:"");
   const UsernameHandler = (val) => {
     setUsername(val);
     setValidateUsername(true);
   };
   const [validatePassword, setValidatePassword] = useState(true);
-  const [Password, setPassword] = useState(route.params!=undefined?route.params.userListData.password:"");
+  const [Password, setPassword] = useState(route.params!=undefined?route.params.item.info.password:"");
   const PasswordHandler = (val) => {
     setPassword(val);
     setValidatePassword(true);
   };
 
   const [validateRePassword, setValidateRePassword] = useState(true);
-  const [RePassword, setRePassword] = useState(route.params!=undefined?route.params.userListData.password:"");
+  const [RePassword, setRePassword] = useState(route.params!=undefined?route.params.item.info.password:"");
   const RePasswordHandler = (val) => {
     setRePassword(val);
     setValidateRePassword(true);
@@ -179,7 +179,7 @@ export default function AddManager({ navigation, route }) {
 
   const [validateGender, setValidateGender] = useState(true);
   const [isOpenGender, setIsOpenGender] = useState(false);
-  const [currentValueGender, setCurrentValueGender] = useState(route.params!=undefined?route.params.userListData.sex:"");
+  const [currentValueGender, setCurrentValueGender] = useState(route.params!=undefined?route.params.item.info.sex:"");
   const itemsGender = [
     {
       label: "Male",
