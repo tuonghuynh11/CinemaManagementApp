@@ -80,7 +80,7 @@ function ElectronicTicketScreen({ navigation, route }) {
           keyExtractor={(item, index) => index}
           data={ticketInfo.ticketList}
           renderItem={renderTicketItem}
-          showsHorizontalScrollIndicator="false"
+          showsHorizontalScrollIndicator={false}
           ItemSeparatorComponent={() => (
             <View
               style={{

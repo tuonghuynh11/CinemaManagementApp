@@ -96,7 +96,7 @@ function MoviesSearchList({
       keyExtractor={(item, index) => index.toString()}
       data={data}
       renderItem={renderMovie}
-      showsVerticalScrollIndicator="false"
+      showsVerticalScrollIndicator={false}
       ListFooterComponent={renderFooter}
       onEndReachedThreshold={0}
       onEndReached={handleLoadMore}
