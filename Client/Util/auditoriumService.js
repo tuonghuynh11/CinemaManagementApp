@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = "https://cinema-ticket-booking-server.up.railway.app";
+const baseURL = "https://productcatalog123.azurewebsites.net";
 
 const audiService = axios.create({
   baseURL,
