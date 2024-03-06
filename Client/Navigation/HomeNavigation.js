@@ -16,6 +16,7 @@ function HomeNavigation() {
     <BottomTab.Navigator
       screenOptions={{
         tabBarStyle: {
+          height: 80,
           backgroundColor: GlobalColors.lightBackground,
           position: "absolute",
           bottom: 25,

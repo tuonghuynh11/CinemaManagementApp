@@ -435,7 +435,7 @@ function TicketHistoryScreen({ navigation, route }) {
                   keyExtractor={(item, index) => index}
                   data={tickets}
                   renderItem={renderTicketItem}
-                  showsHorizontalScrollIndicator="false"
+                  showsHorizontalScrollIndicator={false}
                   ItemSeparatorComponent={() => (
                     <View
                       style={{
