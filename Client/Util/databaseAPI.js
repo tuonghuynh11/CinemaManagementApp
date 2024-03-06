@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL = "https://cinema-ticket-booking-server.up.railway.app";
+const BASE_URL = "https://productcatalog123.azurewebsites.net";
 export async function GetMovieScheduleById(movieId) {
   var res = await axios
     .get(

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = "https://cinema-ticket-booking-server.up.railway.app";
+const baseURL = "https://productcatalog123.azurewebsites.net";
 
 const showtimeService = axios.create({
   baseURL,
@@ -9,7 +9,7 @@ const showtimeService = axios.create({
 export const getAllShowtimes = async () => {
   try {
     const response = await showtimeService.get(
-      "/select/entire/showtimes?page-size=1000&page-number=8"
+      "/select/entire/showtimes?page-size=1000&page-number=1"
     );
     return response.data;
   } catch (error) {
